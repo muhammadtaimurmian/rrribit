@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Randomly Moving Images</title>
+<link rel="stylesheet" href="lola.css">
+</head>
+<body>
+
+<!-- <div id="content">
+    <h1 id="header">Albert The Frog</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div> -->
+
+<!-- Navbar Section -->
+<nav class="navbar">
+    <div class="navbar__container">
+        <a href="#home" id="navbar__logo">Albert The Frog</a>
+        <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="https://t.me/+F1h-shsit-5iM2E8" class="navbar__links" id="home-page">Telegram</a>
+            </li>
+            <li class="navbar__item">
+                <a href="https://twitter.com/rrribit" class="navbar__links" id="about-page">X</a>
+            </li>
+            <li class="navbar__item">
+                <a href="https://dexscreener.com/new-pairs" class="navbar__links" id="services-page">Dexscreener</a>
+            </li>
+            <li class="navbar__btn">
+                <button class="big-button"><a href="https://www.pump.fun/board" class="button" id="rrribits">Buy $rrribits</a></button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+
+<div class="hero" id="home">
+    <div class="hero__container">
+        <p class="hero__description">rrrrribiitt</p>
+        <p class="hero__description-2"> - by Albert the Frog</p>
+    </div>
+</div>
+
+<!-- Services Section -->
+
+<div class="services" id="services">
+    <div class="services__container">
+        <p class="services__description-2">They call me Albie 🐸</p>
+        <p class="services__description">As you can see, I am a frog. A very famous frog.</p>
+        <p class="services__description-3">But you can call me tonight ;)</p>
+        <p class="services__description-5">rrribited for your pleasure</p>
+        <p class="services__description-4">More updates coming soon</p>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+
+    let windowWidth = window.innerWidth;   
+    // Number of images
+    let numImages = windowWidth < 960 ? 40 : 70;
+    let imgWidth = windowWidth < 960 ? 95 : 150;
+        
+
+    // Array to store image paths
+    let imagePaths = [];
+
+    // Function to get image paths from GitHub repository
+    function getImagePaths(callback) {
+        // GitHub repository information
+        let owner = 'muhammadtaimurmian'; // Replace 'your_username' with your GitHub username
+        let repo = 'rrribit'; // Replace 'your_repository' with your repository name
+        let branch = 'main'; // Replace 'main' with your branch name if it's different
+
+        let apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(file => {
+                    if (file.type === 'file' && /\.(jpg|jpeg|png|gif)$/i.test(file.name)) {
+                        imagePaths.push(file.download_url);
+                    }
+                });
+                if (callback) callback();
+            })
+            .catch(error => console.error('Error fetching image paths:', error));
+    }
+
+    // Initialize images
+    function initImages() {
+        for (var i = 0; i < numImages; i++) {
+            var img = document.createElement('img');
+            var randomImagePath = imagePaths[Math.floor(Math.random() * imagePaths.length)];
+            img.src = randomImagePath;
+            img.className = 'image';
+            img.style.left = Math.random() * (window.innerWidth - 200) + 'px'; // Adjusted to avoid images being partially outside the viewport
+            img.style.top = Math.random() * (window.innerHeight + window.innerHeight -30) + 'px'; // Adjusted to avoid images being partially outside the viewport
+            img.style.zIndex = Math.floor(Math.random() * 10) + 1; // Random z-index between 1 and 3
+            img.dx = (Math.random() - 0.5) * 0.5; // Random horizontal speed
+            img.dy = (Math.random() - 0.5) * 0.5; // Random vertical speed
+            img.style.width = imgWidth + 'px'; // Adjust the size as needed
+            img.style.height = 'auto';
+            document.body.appendChild(img);
+        }
+    }
+
+    // Initialize images
+    function initImages() {
+        for (var i = 0; i < numImages; i++) {
+            var img = document.createElement('img');
+            var randomImagePath = imagePaths[Math.floor(Math.random() * imagePaths.length)];
+            img.src = randomImagePath;
+            img.className = 'image';
+            img.style.left = Math.random() * (window.innerWidth - 200) + 'px'; // Adjusted to avoid images being partially outside the viewport
+            img.style.top = Math.random() * (window.innerHeight + window.innerHeight -30) + 'px'; // Adjusted to avoid images being partially outside the viewport
+            img.style.zIndex = Math.floor(Math.random() * 10) + 1; // Random z-index between 1 and 3
+            img.dx = (Math.random() - 0.5) * 0.5; // Random horizontal speed
+            img.dy = (Math.random() - 0.5) * 0.5; // Random vertical speed
+            img.style.width = '150px'; // Adjust the size as needed
+            img.style.height = 'auto';
+            document.body.appendChild(img);
+        }
+    }
+
+    // Function to move images
+    function moveImages() {
+        var images = document.getElementsByClassName('image');
+        for (var i = 0; i < images.length; i++) {
+            var img = images[i];
+            var imgLeft = parseFloat(img.style.left);
+            var imgTop = parseFloat(img.style.top);
+            var imgWidth = img.width;
+            var imgHeight = img.height;
+
+            img.style.left = (imgLeft + img.dx) + 'px';
+            img.style.top = (imgTop + img.dy) + 'px';
+
+            // Collision detection with boundaries
+            if (imgLeft <= 0 || imgLeft + imgWidth >= window.innerWidth) {
+                // Reverse horizontal direction with a buffer zone
+                img.dx *= -1;
+                img.style.left = (imgLeft + img.dx) + 'px';
+            }
+            if (imgTop <= 0 || imgTop + imgHeight >= window.innerHeight) {
+                // Reverse vertical direction with a buffer zone
+                img.dy *= -1;
+                img.style.top = (imgTop + img.dy) + 'px';
+            }
+        }
+    }
+
+
+    // Update images position every 16 milliseconds (about 60 frames per second)
+    setInterval(moveImages, 7);
+
+    // Load images from folder and initialize them
+    getImagePaths(initImages);
+</script>
+
+<!-- JavaScript Link -->
+<script src="app.js"></script>
+
+</body>
+</html>
+
+

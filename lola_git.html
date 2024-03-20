@@ -69,8 +69,8 @@
 
     let windowWidth = window.innerWidth;   
     // Number of images
-    let numImages = windowWidth < 960 ? 35 : 70;
-    let imgWidth = windowWidth < 960 ? 200 : 150;
+    let numImages = windowWidth < 960 ? 40 : 70;
+    let imgWidth = windowWidth < 960 ? 80 : 150;
         
 
     // Array to store image paths
@@ -111,24 +111,6 @@
             img.dx = (Math.random() - 0.5) * 0.5; // Random horizontal speed
             img.dy = (Math.random() - 0.5) * 0.5; // Random vertical speed
             img.style.width = imgWidth + 'px'; // Adjust the size as needed
-            img.style.height = 'auto';
-            document.body.appendChild(img);
-        }
-    }
-
-    // Initialize images
-    function initImages() {
-        for (var i = 0; i < numImages; i++) {
-            var img = document.createElement('img');
-            var randomImagePath = imagePaths[Math.floor(Math.random() * imagePaths.length)];
-            img.src = randomImagePath;
-            img.className = 'image';
-            img.style.left = Math.random() * (window.innerWidth - 200) + 'px'; // Adjusted to avoid images being partially outside the viewport
-            img.style.top = Math.random() * (window.innerHeight + window.innerHeight -30) + 'px'; // Adjusted to avoid images being partially outside the viewport
-            img.style.zIndex = Math.floor(Math.random() * 10) + 1; // Random z-index between 1 and 3
-            img.dx = (Math.random() - 0.5) * 0.5; // Random horizontal speed
-            img.dy = (Math.random() - 0.5) * 0.5; // Random vertical speed
-            img.style.width = '150px'; // Adjust the size as needed
             img.style.height = 'auto';
             document.body.appendChild(img);
         }
